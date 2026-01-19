@@ -1,0 +1,154 @@
+---
+title: Getting Started with Splan
+description: Set up your Splan account and complete your first steps to begin automating your real estate sales and marketing processes.
+---
+
+## Prerequisites
+
+Before starting, ensure you have:
+
+- A valid email address for account verification
+- Access to your real estate project data (CSV or JSON format)
+- An active internet connection
+
+<Callout kind="info">
+Splan requires email verification within 24 hours to activate full features.
+</Callout>
+
+## Create and Verify Your Account
+
+Sign up at [https://dashboard.example.com/register](https://dashboard.example.com/register). Splan provides a free trial to test automation workflows for your real estate projects.
+
+Follow these steps to get your workspace ready:
+
+<Steps>
+  <Step title="Sign Up" icon="user-plus">
+    Navigate to the dashboard and enter your email, company name, and password.
+
+    Choose your role: `Developer`, `Sales Manager`, or `Marketer`.
+  </Step>
+
+  <Step title="Verify Email" icon="mail">
+    Check your inbox for the verification link from `no-reply@splan.com`.
+
+    Click the link to activate your account. Verification unlocks API access.
+  </Step>
+
+  <Step title="Configure Workspace" icon="settings">
+    Log in and set your workspace name, time zone, and default currency (`USD` or `EUR`).
+
+    Enable integrations like CRM or email providers in the settings panel.
+  </Step>
+</Steps>
+
+## Import Your First Real Estate Project
+
+Upload your project data to start automating leads and sales funnels. Splan supports CSV imports or direct API integration.
+
+<Tabs>
+  <Tab title="CSV Upload" icon="upload">
+    Prepare a CSV with columns: `project_name`, `location`, `units_available`, `price_range`.
+
+    ```csv
+    project_name,location,units_available,price_range,status
+    Sunny Heights,Moscow,150,"$200k-$500k",active
+    Riverside Towers,St. Petersburg,200,"$300k-$700k",active
+    ```
+
+    In the dashboard, go to **Projects > Import** and select your file.
+  </Tab>
+
+  <Tab title="API Import" icon="code">
+    Use the Projects API to import programmatically.
+
+    <CodeGroup tabs="JavaScript,cURL">
+      ````javascript
+      const response = await fetch('https://api.example.com/v1/projects', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${YOUR_API_KEY}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          project_name: 'Sunny Heights',
+          location: 'Moscow',
+          units_available: 150,
+          price_range: '$200k-$500k'
+        })
+      });
+      ````
+
+      ````bash
+      curl -X POST https://api.example.com/v1/projects \
+        -H "Authorization: Bearer YOUR_API_KEY" \
+        -H "Content-Type: application/json" \
+        -d '{
+          "project_name": "Sunny Heights",
+          "location": "Moscow",
+          "units_available": 150,
+          "price_range": "$200k-$500k"
+        }'
+      ````
+    </CodeGroup>
+  </Tab>
+</Tabs>
+
+<ParamField path="project_name" param-type="string" required="true">
+  Name of the real estate project.
+</ParamField>
+
+<ParamField query="api_key" param-type="string" required="true">
+  Your Splan API key from dashboard settings.
+</ParamField>
+
+## Run Your First Automation Workflow
+
+Create a simple lead nurturing workflow: capture leads > send personalized emails > track engagement.
+
+<Steps>
+  <Step title="Create Workflow" icon="zap">
+    Go to **Automations > New Workflow**.
+
+    Select template: `Real Estate Lead Nurture`.
+  </Step>
+
+  <Step title="Add Triggers and Actions" icon="play">
+    Set trigger: `New Lead from Project Page`.
+
+    Add action: `Send Email` with dynamic fields like `{project_name}` and `{price_range}`.
+  </Step>
+
+  <Step title="Test and Activate" icon="check-circle">
+    Run a test with sample data.
+
+    Activate the workflow to automate your sales process.
+  </Step>
+</Steps>
+
+<Callout kind="success">
+Your first workflow is live! Monitor performance in the **Analytics** dashboard.
+</Callout>
+
+## Next Steps
+
+Explore more features to scale your real estate automation.
+
+<Columns cols={3}>
+  <Card title="Authentication" icon="shield" href="/authentication">
+    Secure your API integrations with tokens and webhooks.
+  </Card>
+
+  <Card title="Advanced Workflows" icon="settings" href="/workflows">
+    Build complex automations for CRM sync and reporting.
+  </Card>
+
+  <Card title="API Reference" icon="code" href="/api">
+    Full API docs for custom integrations.
+  </Card>
+</Columns>
+
+<Expandable title="Troubleshooting Common Issues" default-open="false">
+  - **Import fails**: Check CSV encoding (UTF-8) and column headers.
+  - **Workflow not triggering**: Verify project status is `active`.
+  - **API errors**: Ensure `Authorization` header uses `Bearer {YOUR_API_KEY}`.
+</Expandable>

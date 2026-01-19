@@ -1,0 +1,131 @@
+---
+title: Splan Features Overview
+description: Explore the core capabilities of Splan, including tools for sales automation, marketing campaigns, and business process optimization in real estate.
+---
+
+## Overview
+
+Splan provides a comprehensive ecosystem for real estate developers to automate sales and marketing processes. You can manage sales pipelines, automate marketing workflows, generate and nurture leads, and access powerful analytics dashboards. These features optimize your business operations, increase conversion rates, and deliver actionable insights.
+
+<Callout kind="info">
+  All features integrate seamlessly with your existing CRM and property management systems via REST APIs at `https://api.example.com`.
+</Callout>
+
+## Key Features
+
+Discover the core tools that power Splan's automation capabilities.
+
+<Columns cols={2}>
+  <Card title="Sales Pipeline Management" icon="trending-up" href="#sales-pipeline">
+    Track deals from lead to close with customizable stages and automated notifications.
+  </Card>
+  <Card title="Marketing Automation" icon="zap" href="#marketing-automation">
+    Build email campaigns, SMS sequences, and drip workflows tailored to buyer journeys.
+  </Card>
+  <Card title="Lead Generation & Nurturing" icon="users" href="#lead-generation">
+    Capture leads from multiple channels and nurture them with personalized content.
+  </Card>
+  <Card title="Analytics & Reporting" icon="bar-chart-3" href="#analytics">
+    Monitor performance with real-time dashboards and exportable reports.
+  </Card>
+</Columns>
+
+## Sales Pipeline Management
+
+Organize your sales process with visual pipelines. You define stages like "New Lead", "Site Visit Scheduled", "Offer Made", and "Closed Won". Splan automates transitions based on triggers such as email opens or property views.
+
+<Steps>
+  <Step title="Create Pipeline" icon="plus">
+    Navigate to Pipelines in the dashboard and click "New Pipeline".
+  </Step>
+  <Step title="Add Stages" icon="settings">
+    Drag and drop stages and set automation rules.
+  </Step>
+  <Step title="Assign Deals" icon="user-check">
+    Move properties through stages as deals progress.
+  </Step>
+</Steps>
+
+```javascript
+// Example: Update deal stage via API
+const response = await fetch('https://api.example.com/v1/deals/123', {
+  method: 'PATCH',
+  headers: { 'Authorization': `Bearer ${YOUR_API_KEY}` },
+  body: JSON.stringify({ stage: 'offer-made' })
+});
+```
+
+## Marketing Automation Workflows
+
+Design no-code workflows for targeted campaigns. Connect triggers like "Lead Viewed Property" to actions such as "Send Welcome Email" or "Schedule Callback".
+
+<Tabs>
+  <Tab title="Email Campaign" icon="mail">
+    Trigger emails based on user behavior.
+    
+````javascript
+// Integrate with email service
+await fetch('https://api.example.com/v1/workflows/456/trigger', {
+  method: 'POST',
+  body: JSON.stringify({ leadId: 'lead-789', action: 'send-email' })
+});
+````
+  </Tab>
+  <Tab title="SMS Sequence" icon="phone">
+    Automate follow-ups via SMS for hot leads.
+    
+````javascript
+// SMS automation example
+const smsData = { phone: '+1234567890', message: 'Schedule your viewing?' };
+await fetch('https://api.example.com/v1/sms/send', {
+  method: 'POST',
+  body: JSON.stringify(smsData)
+});
+````
+  </Tab>
+</Tabs>
+
+## Lead Generation and Nurturing
+
+Capture leads from websites, ads, and events. Splan scores leads automatically and nurtures them with personalized content until they're sales-ready.
+
+<CodeGroup tabs="JavaScript,Python">
+```javascript
+// Capture lead from form
+const lead = await fetch('https://api.example.com/v1/leads', {
+  method: 'POST',
+  body: JSON.stringify({
+    email: 'buyer@example.com',
+    propertyId: 'prop-101',
+    source: 'website-form'
+  })
+});
+```
+
+```python
+import requests
+response = requests.post('https://api.example.com/v1/leads', json={
+    'email': 'buyer@example.com',
+    'propertyId': 'prop-101',
+    'source': 'website-form'
+})
+```
+</CodeGroup>
+
+## Analytics and Reporting Dashboards
+
+Gain insights into pipeline velocity, campaign ROI, and lead conversion rates. Customize dashboards with drag-and-drop widgets.
+
+| Metric              | Description                          | Default View |
+|---------------------|--------------------------------------|--------------|
+| Pipeline Velocity   | Average time per stage               | Weekly      |
+| Lead Conversion     | Leads to deals ratio                 | Monthly     |
+| Campaign ROI        | Revenue generated per campaign       | Quarterly   |
+
+<Expandable title="Advanced Reporting Tips" default-open="false">
+  Export data as CSV or integrate with tools like Google Analytics. Use filters for property-type specific reports.
+</Expandable>
+
+<Callout kind="tip">
+  Start with the Sales Pipeline to see immediate impact. Explore [Quickstart](/quickstart) for setup.
+</Callout>

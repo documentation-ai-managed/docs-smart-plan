@@ -1,0 +1,165 @@
+---
+title: Integrations and Extensions
+description: Connect Splan with third-party services to enhance your real estate automation, including webhooks and API integrations.
+---
+
+## Overview
+
+Splan integrates seamlessly with popular CRM, email, and marketing tools to streamline your real estate sales and marketing processes. You can set up connections via webhooks for real-time notifications or use the API for custom extensions. This guide covers key integrations to supercharge your automation.
+
+<Columns cols={3}>
+  <Card title="CRM Sync" icon="users" href="#crm-integrations">
+    Sync leads and deals with HubSpot or Salesforce.
+  </Card>
+  <Card title="Email Tools" icon="mail" href="#email-tools">
+    Connect to Mailchimp or SendGrid for campaigns.
+  </Card>
+  <Card title="Webhooks" icon="zap" href="#webhooks">
+    Receive instant updates on property viewings.
+  </Card>
+</Columns>
+
+## CRM Integrations
+
+Connect Splan to your CRM to automatically sync leads from property inquiries.
+
+<Tabs>
+  <Tab title="HubSpot" icon="activity">
+    Use HubSpot's native webhook support or Zapier for no-code integration.
+
+    <Steps>
+      <Step title="Create Zapier Zap" icon="zap">
+        Log in to Zapier and select Splan as the trigger app.
+      </Step>
+      <Step title="Set Trigger" icon="play">
+        Choose `{property_viewed}` event and authenticate with your Splan API key.
+      </Step>
+      <Step title="Map to HubSpot" icon="users">
+        Create a new contact in HubSpot with lead details.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Salesforce" icon="database">
+    Leverage Salesforce Flows for advanced syncing.
+
+    <CodeGroup tabs="JavaScript,Python">
+      ```javascript
+      const response = await fetch('https://api.example.com/v1/leads', {
+        method: 'POST',
+        headers: { 'Authorization': 'Bearer YOUR_API_KEY' },
+        body: JSON.stringify({
+          email: 'lead@example.com',
+          propertyId: 'prop-123'
+        })
+      });
+      ```
+      ```python
+      import requests
+      response = requests.post(
+        'https://api.example.com/v1/leads',
+        headers={'Authorization': 'Bearer YOUR_API_KEY'},
+        json={'email': 'lead@example.com', 'propertyId': 'prop-123'}
+      )
+      ```
+    </CodeGroup>
+  </Tab>
+</Tabs>
+
+<Callout kind="tip">
+  Test integrations in Splan's sandbox environment first to avoid disrupting live data.
+</Callout>
+
+## Email and Marketing Tool Connections
+
+Configure email tools to send personalized property alerts.
+
+### Mailchimp Setup
+
+Follow these steps to link Splan with Mailchimp:
+
+<Steps>
+  <Step title="Get API Key" icon="key">
+    Generate a Mailchimp API key from your account settings.
+  </Step>
+  <Step title="Add to Splan" icon="settings">
+    In Splan dashboard, navigate to Integrations > Email and paste the key.
+  </Step>
+  <Step title="Map Tags" icon="tag">
+    Assign Splan tags like `{high_interest}` to Mailchimp segments.
+  </Step>
+</Steps>
+
+## Webhooks for Custom Notifications
+
+Webhooks enable real-time data pushes to your endpoints.
+
+Set up a webhook listener:
+
+```javascript
+app.post('/splan-webhook', (req, res) => {
+  const event = req.body.event; // e.g., "property_viewed"
+  const data = req.body.data;
+  // Process lead data
+  console.log(`New viewing: ${data.propertyId}`);
+  res.status(200).send('OK');
+});
+```
+
+Validate payloads using HMAC signatures from Splan.
+
+<ParamField header="X-Splan-Signature" param-type="string" required="true">
+  HMAC SHA256 signature of the payload.
+</ParamField>
+
+## API Endpoints for Advanced Extensions
+
+Extend Splan with custom API calls.
+
+<Request tabs="cURL,JavaScript" show-lines="true">
+  ```bash
+  curl -X POST https://api.example.com/v1/properties \
+    -H "Authorization: Bearer YOUR_API_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{
+      "title": "Luxury Condo",
+      "price": 500000
+    }'
+  ```
+  ```javascript
+  const response = await fetch('https://api.example.com/v1/properties', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer YOUR_API_KEY',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      title: 'Luxury Condo',
+      price: 500000
+    })
+  });
+  ```
+</Request>
+
+<Response tabs="201,400">
+  ```json
+  {
+    "id": "prop-456",
+    "title": "Luxury Condo",
+    "status": "created"
+  }
+  ```
+  ```json
+  {
+    "error": "Invalid price format"
+  }
+  ```
+</Response>
+
+<ResponseField name="id" field-type="string" required="true">
+  Unique property identifier.
+</ResponseField>
+
+<Expandable title="Troubleshooting Common Issues" default-open="false">
+  - **Signature mismatch**: Ensure your secret matches Splan's dashboard.
+  - **Rate limits**: API allows `<1000` requests per minute.
+</Expandable>

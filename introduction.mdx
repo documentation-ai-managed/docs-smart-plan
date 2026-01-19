@@ -1,0 +1,125 @@
+---
+title: Introduction to Splan
+description: Discover Splan, the ecosystem of services for automating sales and marketing in real estate development. Learn about key features and how it optimizes business processes.
+---
+
+## Overview
+
+Splan provides an ecosystem of services that automates sales and marketing for real estate developers. You streamline lead generation, client nurturing, and deal closures with integrated tools tailored for the property sector. Optimize your business processes and boost conversion rates using innovative automation solutions.
+
+<Callout kind="info">
+Splan integrates seamlessly with your existing CRM and property management systems.
+</Callout>
+
+## Key Benefits for Real Estate Developers
+
+Splan delivers measurable advantages that transform how you handle sales pipelines and marketing campaigns.
+
+<Columns cols={3}>
+  <Card title="Increased Efficiency" icon="zap" href="#core-features">
+    Automate repetitive tasks like lead scoring and follow-ups, saving your team hours daily.
+  </Card>
+  <Card title="Higher Conversions" icon="trending-up" href="#core-features">
+    Personalized campaigns increase deal closures by up to 40% through targeted automation.
+  </Card>
+  <Card title="Scalable Growth" icon="users" href="#core-features">
+    Handle thousands of leads without adding staff, scaling effortlessly as your portfolio expands.
+  </Card>
+</Columns>
+
+## Core Features
+
+Explore the powerful features that power Splan's automation ecosystem.
+
+<Tabs>
+  <Tab title="Sales Automation" icon="shopping-cart">
+    Automate your entire sales funnel from lead capture to contract signing.
+    
+    ```javascript
+    // Example: Create a lead via API
+    const response = await fetch('https://api.example.com/v1/leads', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer YOUR_API_KEY' },
+      body: JSON.stringify({
+        email: 'lead@example.com',
+        propertyId: 'prop-123',
+        source: 'website-form'
+      })
+    });
+    ```
+  </Tab>
+  <Tab title="Marketing Tools" icon="mail" >
+    Deploy email sequences and SMS campaigns with dynamic content based on buyer behavior.
+    
+    <Image
+      src="https://via.placeholder.com/800x400/1c6cfc/ffffff?text=Marketing+Dashboard"
+      alt="Splan marketing dashboard showing campaign analytics"
+      width="800"
+      height="400"
+    />
+  </Tab>
+  <Tab title="Analytics" icon="bar-chart-3">
+    Gain insights into funnel performance with real-time dashboards and reports.
+    
+    ```mermaid
+    graph LR
+        A[Leads] --> B[Qualified]
+        B --> C[Deals Closed]
+        C --> D[Revenue]
+    ```
+  </Tab>
+</Tabs>
+
+## Quick Start
+
+Get up and running with Splan in minutes.
+
+<Steps>
+  <Step title="Sign Up" icon="user-plus">
+    Create your account at `https://dashboard.example.com` and verify your email.
+  </Step>
+  <Step title="Get API Key" icon="key">
+    Navigate to settings and generate your `{API_KEY}`.
+  </Step>
+  <Step title="Integrate" icon="code">
+    <CodeGroup tabs="JavaScript,Python">
+      ```javascript
+      const splan = new SplanClient({ apiKey: 'YOUR_API_KEY' });
+      const leads = await splan.leads.list();
+      console.log(leads);
+      ```
+      ```python
+      from splan import SplanClient
+      client = SplanClient(api_key='YOUR_API_KEY')
+      leads = client.leads.list()
+      print(leads)
+      ```
+    </CodeGroup>
+  </Step>
+  <Step title="Launch Campaign" icon="rocket">
+    Set up your first automated campaign and monitor results.
+  </Step>
+</Steps>
+
+## Next Steps
+
+Dive deeper into Splan documentation.
+
+<Columns cols={2}>
+  <Card title="Quickstart Guide" icon="book-open" href="/quickstart">
+    Complete your first integration.
+  </Card>
+  <Card title="Authentication" icon="lock" href="/authentication">
+    Secure your API access.
+  </Card>
+  <Card title="API Reference" icon="api" href="/api-reference">
+    Full endpoint details.
+  </Card>
+  <Card title="Changelog" icon="git-branch" href="/changelog">
+    Stay updated with releases.
+  </Card>
+</Columns>
+
+<Callout kind="tip">
+  Join our community forum for support and best practices.
+</Callout>
